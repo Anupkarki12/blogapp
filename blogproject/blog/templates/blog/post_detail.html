@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} - BlogSpace{% endblock %}
+
+{% block content %}
+<div class="post-detail">
+    <a href="{% url 'post_list' %}" class="back-link">← Back to all posts</a>
+    
+    <div class="card">
+        <div class="post-detail-header">
+            <h1 class="post-detail-title">{{ post.title }}</h1>
+            <div class="post-detail-meta">
+                <span>👤 {{ post.author.username }}</span>
+                <span>📅 {{ post.created_at|date:"F d, Y" }}</span>
+                <span>📊 Status: {{ post.status|title }}</span>
+            </div>
+        </div>
+        <div class="post-detail-content">
+            {{ post.content|linebreaks }}
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">💬 Comments ({{ comments.count }})</h2>
+        
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">{{ comment.user.username }}</span>
+                        <span class="comment-date">{{ comment.created_at|date:"M d, Y at g:i A" }}</span>
+                    </div>
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state" style="padding: 2rem;">
+                <p>No comments yet. Be the first to comment!</p>
+            </div>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <div class="card" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Add a Comment</h3>
+                <form method="post" action="{% url 'add_comment' post.slug %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea name="content" class="form-textarea" placeholder="Write your comment..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="card" style="margin-top: 2rem; text-align: center;">
+                <p style="margin-bottom: 1rem;">You must be logged in to comment.</p>
+                <a href="{% url 'login' %}" class="btn btn-primary" style="display: inline-block; width: auto;">Login to Comment</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
