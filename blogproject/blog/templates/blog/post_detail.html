@@ -7,6 +7,12 @@
     <a href="{% url 'post_list' %}" class="back-link">← Back to all posts</a>
     
     <div class="card">
+        {% if post.image %}
+            <div style="margin-bottom: 2rem; border-radius: 12px; overflow: hidden;">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; max-height: 400px; object-fit: cover;">
+            </div>
+        {% endif %}
+        
         <div class="post-detail-header">
             <h1 class="post-detail-title">{{ post.title }}</h1>
             <div class="post-detail-meta">

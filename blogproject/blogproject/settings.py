@@ -135,3 +135,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
+
+# Media files (images)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

@@ -5,7 +5,12 @@
 {% block content %}
 <div class="form-container">
     <div class="form-card">
-        <h1 class="form-title">🔐 Welcome Back</h1>
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #6366f1, #ec4899); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 2.5rem; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);">
+                🔐
+            </div>
+        </div>
+        <h1 class="form-title">Welcome Back</h1>
         <p class="form-subtitle">Login to continue to BlogSpace</p>
         
         {% if form.errors %}
@@ -19,15 +24,33 @@
             
             <div class="form-group">
                 <label class="form-label">Username</label>
-                <input type="text" name="username" class="form-input" placeholder="Enter your username" required>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #64748b;">👤</span>
+                    <input type="text" name="username" class="form-input" placeholder="Enter your username" required style="padding-left: 45px;">
+                </div>
             </div>
             
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-input" placeholder="Enter your password" required>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #64748b;">🔑</span>
+                    <input type="password" name="password" class="form-input" placeholder="Enter your password" required style="padding-left: 45px;">
+                </div>
             </div>
             
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary" style="
+                background: linear-gradient(135deg, #6366f1, #4f46e5);
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+                font-weight: 600;
+                border-radius: 12px;
+                width: 100%;
+                margin-top: 0.5rem;
+                box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+                transition: all 0.3s ease;
+            ">
+                <span style="margin-right: 8px;">🚀</span> Login to Account
+            </button>
             <input type="hidden" name="next" value="{{ next }}">
         </form>
         

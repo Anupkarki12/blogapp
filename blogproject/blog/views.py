@@ -23,12 +23,14 @@ def create_post(request):
         title = request.POST.get('title')
         content = request.POST.get('content')
         status = request.POST.get('status', 'draft')
+        image = request.FILES.get('image')
         
         post = Post.objects.create(
             author=request.user,
             title=title,
             content=content,
-            status=status
+            status=status,
+            image=image
         )
         return redirect('post_detail', slug=post.slug)
     
